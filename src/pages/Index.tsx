@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import ScheduleTable from "@/components/schedule/ScheduleTable";
 import ActivityBoard from "@/components/schedule/ActivityBoard";
@@ -14,7 +13,6 @@ import {
 } from "@dnd-kit/core";
 import { Activity, ScheduleData, TimeSlot } from "@/types/schedule";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-import { arrayMove } from "@dnd-kit/sortable";
 import { useToast } from "@/components/ui/use-toast";
 import { generateInitialData } from "@/utils/scheduleUtils";
 
