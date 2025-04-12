@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import ScheduleTable from "@/components/schedule/ScheduleTable";
 import ActivityBoard from "@/components/schedule/ActivityBoard";
+import ActivityLibrary from "@/components/schedule/ActivityLibrary";
 import { 
   DndContext, 
   DragEndEvent,
@@ -14,12 +16,13 @@ import {
 import { Activity, ScheduleData, TimeSlot } from "@/types/schedule";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import { useToast } from "@/components/ui/use-toast";
-import { generateInitialData } from "@/utils/scheduleUtils";
+import { generateId, generateInitialData, getLibraryActivities } from "@/utils/scheduleUtils";
 
 const Index = () => {
   const { toast } = useToast();
   const [scheduleData, setScheduleData] = useState<ScheduleData>(() => generateInitialData());
   const [draggedActivity, setDraggedActivity] = useState<Activity | null>(null);
+  const [libraryActivities] = useState<Activity[]>(() => getLibraryActivities());
   
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -183,11 +186,36 @@ const Index = () => {
       return newData;
     });
   };
+  
+  const handleAddActivityFromLibrary = (libraryActivity: Activity) => {
+    // Create a new copy of the activity with a unique ID
+    const newActivity: Activity = {
+      ...libraryActivity,
+      id: generateId() // Generate a unique ID
+    };
+    
+    // Add the new activity to the board
+    setScheduleData(prev => ({
+      ...prev,
+      activities: [...prev.activities, newActivity]
+    }));
+    
+    toast({
+      title: "Activity added",
+      description: `"${newActivity.title}" has been added to your board.`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Schedule Planner</h1>
+        
+        {/* Activity Library Table */}
+        <ActivityLibrary 
+          activities={libraryActivities}
+          onAddActivity={handleAddActivityFromLibrary}
+        />
         
         <DndContext
           sensors={sensors}

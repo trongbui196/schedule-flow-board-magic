@@ -98,3 +98,24 @@ export const getActivityColorClasses = (color: string) => {
   
   return colorMap[color] || { bg: 'bg-gray-200', text: 'text-gray-800', border: 'border-gray-300' };
 };
+
+// Get library activities
+export const getLibraryActivities = (): Activity[] => {
+  return [
+    { id: "lib-1", title: "Brainstorming", description: "Creative thinking session", color: "schedule-item-1" },
+    { id: "lib-2", title: "Sprint Planning", description: "Plan next sprint tasks", color: "schedule-item-2" },
+    { id: "lib-3", title: "Retrospective", description: "Review previous sprint", color: "schedule-item-3" },
+    { id: "lib-4", title: "1-on-1 Meeting", description: "Individual check-in", color: "schedule-item-4" },
+    { id: "lib-5", title: "Workshop", description: "Hands-on learning session", color: "schedule-item-5" },
+    { id: "lib-6", title: "Product Demo", description: "Showcase new features", color: "schedule-item-1" },
+    { id: "lib-7", title: "Standup", description: "Daily status update", color: "schedule-item-2" },
+    { id: "lib-8", title: "Training", description: "Skill development", color: "schedule-item-3" },
+    { id: "lib-9", title: "User Testing", description: "Test with real users", color: "schedule-item-4" },
+    { id: "lib-10", title: "Strategy Session", description: "Long-term planning", color: "schedule-item-5" },
+    { id: "lib-11", title: "Lunch & Learn", description: "Casual learning session", color: "schedule-item-1" },
+    { id: "lib-12", title: "Customer Interview", description: "Feedback collection", color: "schedule-item-2" },
+    { id: "lib-13", title: "Hackathon", description: "Rapid prototyping", color: "schedule-item-3" },
+    { id: "lib-14", title: "All Hands", description: "Company-wide meeting", color: "schedule-item-4" },
+    { id: "lib-15", title: "Tech Talk", description: "Knowledge sharing", color: "schedule-item-5" }
+  ];
+};
