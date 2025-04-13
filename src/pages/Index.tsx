@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from "react";
 import ScheduleTable from "@/components/schedule/ScheduleTable";
 import ActivityBoard from "@/components/schedule/ActivityBoard";
 import ActivityLibrary from "@/components/schedule/ActivityLibrary";
+import Map from "@/components/VietMapLeaflet";
 import { 
   DndContext, 
   DragEndEvent,
@@ -211,11 +211,20 @@ const Index = () => {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Schedule Planner</h1>
         
-        {/* Activity Library Table */}
-        <ActivityLibrary 
-          activities={libraryActivities}
-          onAddActivity={handleAddActivityFromLibrary}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          {/* Activity Library - takes 1/3 width */}
+          <div className="lg:col-span-1">
+            <ActivityLibrary 
+              activities={libraryActivities}
+              onAddActivity={handleAddActivityFromLibrary}
+            />
+          </div>
+          
+          {/* Map Component - takes 2/3 width */}
+          <div className="lg:col-span-2 bg-white rounded-lg shadow-md overflow-hidden h-[500px]">
+            <Map />
+          </div>
+        </div>
         
         <DndContext
           sensors={sensors}
@@ -225,7 +234,7 @@ const Index = () => {
           onDragEnd={handleDragEnd}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* Activity board - takes 1/4 of the space on large screens */}
+            {/* Activity board */}
             <div className="lg:col-span-1 md:col-span-1">
               <ActivityBoard 
                 activities={scheduleData.activities}
@@ -233,7 +242,7 @@ const Index = () => {
               />
             </div>
             
-            {/* Schedule table - takes 3/4 of the space on large screens */}
+            {/* Schedule table */}
             <div className="lg:col-span-3 md:col-span-2 overflow-x-auto">
               <ScheduleTable 
                 schedule={scheduleData.schedule}
