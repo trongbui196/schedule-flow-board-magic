@@ -19,10 +19,10 @@ interface ActivityLibraryProps {
 
 const ActivityLibrary = ({ activities, onAddActivity }: ActivityLibraryProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div className="bg-white rounded-lg shadow-md p-4 mb-6 h-full">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Activity Library</h2>
       
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
         <Table>
           <TableHeader>
             <TableRow>

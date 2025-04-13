@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ScheduleTable from "@/components/schedule/ScheduleTable";
 import ActivityBoard from "@/components/schedule/ActivityBoard";
 import ActivityLibrary from "@/components/schedule/ActivityLibrary";
-import Map from "@/components/VietMapLeaflet";
+import Map from "../components/VietMapLeaflet";
 import { 
   DndContext, 
   DragEndEvent,
