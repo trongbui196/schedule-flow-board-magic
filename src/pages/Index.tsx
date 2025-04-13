@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ScheduleTable from "@/components/schedule/ScheduleTable";
 import ActivityBoard from "@/components/schedule/ActivityBoard";
 import ActivityLibrary from "@/components/schedule/ActivityLibrary";
+import VietMapLeaflet from "@/components/VietMapLeaflet";
 import { 
   DndContext, 
   DragEndEvent,
@@ -211,11 +212,20 @@ const Index = () => {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Schedule Planner</h1>
         
-        {/* Activity Library Table */}
-        <ActivityLibrary 
-          activities={libraryActivities}
-          onAddActivity={handleAddActivityFromLibrary}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* Activity Library Table - 1/3 width */}
+          <div className="md:col-span-1">
+            <ActivityLibrary 
+              activities={libraryActivities}
+              onAddActivity={handleAddActivityFromLibrary}
+            />
+          </div>
+          
+          {/* Map - 2/3 width */}
+          <div className="md:col-span-2 h-[500px]">
+            <VietMapLeaflet />
+          </div>
+        </div>
         
         <DndContext
           sensors={sensors}
