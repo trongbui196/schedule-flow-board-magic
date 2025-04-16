@@ -1,10 +1,11 @@
 
 export interface Activity {
   id: string;
-  title: string;
+  name: string;
   description?: string;
   color: string;
-  duration?: number; // in minutes
+  duration?: number;
+  category:string; // in minutes
 }
 
 export interface TimeSlot {

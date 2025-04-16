@@ -20,13 +20,13 @@ interface ActivityLibraryProps {
 const ActivityLibrary = ({ activities, onAddActivity }: ActivityLibraryProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-6 h-full">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Activity Library</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Location</h2>
       
       <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Title</TableHead>
+              <TableHead>Name</TableHead>
               <TableHead>Description</TableHead>
               <TableHead className="w-[100px]">Action</TableHead>
             </TableRow>
@@ -37,10 +37,16 @@ const ActivityLibrary = ({ activities, onAddActivity }: ActivityLibraryProps) =>
               
               return (
                 <TableRow key={activity.id}>
-                  <TableCell className="font-medium">
-                    <span className={`inline-block w-3 h-3 rounded-full ${colorClasses.border} mr-2`}></span>
-                    {activity.title}
-                  </TableCell>
+                  <TableCell>
+  <div className="font-medium flex items-center">
+    <span className={`inline-block w-3 h-3 rounded-full ${colorClasses.border} mr-2`}></span>
+    {activity.name}
+  </div>
+  <div className={`inline-block text-xs mt-1 px-2 py-0.5 rounded-full ${colorClasses.bg} ${colorClasses.text}`}>
+    {activity.category}
+  </div>
+</TableCell>
+
                   <TableCell>{activity.description || "-"}</TableCell>
                   <TableCell>
                     <Button 

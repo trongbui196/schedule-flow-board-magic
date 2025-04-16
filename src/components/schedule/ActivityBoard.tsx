@@ -26,11 +26,12 @@ const ActivityBoard = ({ activities, draggedActivity }: ActivityBoardProps) => {
       
       <div className="space-y-3">
         {activities.length > 0 ? (
-          activities.map(activity => (
+          activities.map((activity,index) => (
             <ActivityItem 
               key={activity.id} 
               activity={activity} 
-              isDragging={draggedActivity?.id === activity.id} 
+              isDragging={draggedActivity?.id === activity.id}
+              index={index}
             />
           ))
         ) : (

@@ -16,14 +16,37 @@ import {
 import { Activity, ScheduleData, TimeSlot } from "@/types/schedule";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import { useToast } from "@/components/ui/use-toast";
-import { generateId, generateInitialData, getLibraryActivities } from "@/utils/scheduleUtils";
+import { generateId, generateInitialData } from "@/utils/scheduleUtils";
+import { supabase } from "@/lib/supabase"; // Ensure you have this import
 
 const Index = () => {
   const { toast } = useToast();
   const [scheduleData, setScheduleData] = useState<ScheduleData>(() => generateInitialData());
   const [draggedActivity, setDraggedActivity] = useState<Activity | null>(null);
-  const [libraryActivities] = useState<Activity[]>(() => getLibraryActivities());
-  
+  const [libraryActivities, setLibraryActivities] = useState<Activity[]>([]);
+
+  useEffect(() => {
+    const fetchLibraryActivities = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Location') // Replace with your actual table name
+          .select('*');
+
+        if (error) throw error;
+        setLibraryActivities(data);
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch activities",
+          variant: "destructive"
+        });
+      }
+    };
+
+    fetchLibraryActivities();
+  }, [toast]);
+
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10, // 10px of movement required before activating
@@ -202,7 +225,7 @@ const Index = () => {
     
     toast({
       title: "Activity added",
-      description: `"${newActivity.title}" has been added to your board.`,
+      description: `"${newActivity.name}" has been added to your board.`,
     });
   };
 

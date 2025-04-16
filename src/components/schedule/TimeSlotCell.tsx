@@ -24,12 +24,13 @@ const TimeSlotCell = ({ timeSlot, draggedActivity }: TimeSlotCellProps) => {
     >
       {timeSlot.activities.length > 0 ? (
         <div className="space-y-1.5">
-          {timeSlot.activities.map(activity => (
+          {timeSlot.activities.map((activity,index) => (
             <ActivityItem 
               key={activity.id} 
               activity={activity} 
               isDragging={draggedActivity?.id === activity.id}
               isScheduled={true}
+              index={index}
             />
           ))}
         </div>
